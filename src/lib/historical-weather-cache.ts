@@ -276,7 +276,7 @@ export class HistoricalWeatherCacheManager {
     }
 
     return new Promise((resolve) => {
-      const transaction = this.db!.createTransaction([ANALYTICS_STORE], 'readonly');
+      const transaction = this.db!.transaction([ANALYTICS_STORE], 'readonly');
       const store = transaction.objectStore(ANALYTICS_STORE);
       const request = store.get(key);
 
@@ -334,7 +334,7 @@ export class HistoricalWeatherCacheManager {
     }
 
     return new Promise((resolve, reject) => {
-      const transaction = this.db!.createTransaction([ANALYTICS_STORE], 'readwrite');
+      const transaction = this.db!.transaction([ANALYTICS_STORE], 'readwrite');
       const store = transaction.objectStore(ANALYTICS_STORE);
       const request = store.put(cacheEntry);
 
@@ -368,7 +368,7 @@ export class HistoricalWeatherCacheManager {
     }
 
     return new Promise((resolve) => {
-      const transaction = this.db!.createTransaction([ANALYTICS_STORE], 'readwrite');
+      const transaction = this.db!.transaction([ANALYTICS_STORE], 'readwrite');
       const store = transaction.objectStore(ANALYTICS_STORE);
       const request = store.delete(key);
 
@@ -394,7 +394,7 @@ export class HistoricalWeatherCacheManager {
     const now = new Date();
 
     // Clear expired historical data
-    const historicalTransaction = this.db.createTransaction([HISTORICAL_STORE], 'readwrite');
+    const historicalTransaction = this.db.transaction([HISTORICAL_STORE], 'readwrite');
     const historicalStore = historicalTransaction.objectStore(HISTORICAL_STORE);
     const historicalIndex = historicalStore.index('expiresAt');
     const historicalRange = IDBKeyRange.upperBound(now);
@@ -408,7 +408,7 @@ export class HistoricalWeatherCacheManager {
     };
 
     // Clear expired analytics data
-    const analyticsTransaction = this.db.createTransaction([ANALYTICS_STORE], 'readwrite');
+    const analyticsTransaction = this.db.transaction([ANALYTICS_STORE], 'readwrite');
     const analyticsStore = analyticsTransaction.objectStore(ANALYTICS_STORE);
     const analyticsIndex = analyticsStore.index('expiresAt');
     const analyticsRange = IDBKeyRange.upperBound(now);
@@ -458,7 +458,7 @@ export class HistoricalWeatherCacheManager {
     // Get IndexedDB storage count
     if (this.db) {
       return new Promise((resolve) => {
-        const transaction = this.db!.createTransaction([HISTORICAL_STORE, ANALYTICS_STORE], 'readonly');
+        const transaction = this.db!.transaction([HISTORICAL_STORE, ANALYTICS_STORE], 'readonly');
         
         let historicalCount = 0;
         let analyticsCount = 0;
@@ -507,7 +507,7 @@ export class HistoricalWeatherCacheManager {
     }
 
     return new Promise((resolve, reject) => {
-      const transaction = this.db!.createTransaction([HISTORICAL_STORE, ANALYTICS_STORE], 'readwrite');
+      const transaction = this.db!.transaction([HISTORICAL_STORE, ANALYTICS_STORE], 'readwrite');
       
       let completed = 0;
       const checkComplete = () => {
