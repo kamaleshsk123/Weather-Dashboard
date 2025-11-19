@@ -65,8 +65,8 @@ export class HistoricalWeatherErrorHandler {
     }
 
     // Handle HTTP status errors
-    if (error.status || error.statusCode) {
-      const status = error.status || error.statusCode;
+    if (typeof error === 'object' && error !== null && ('status' in error || 'statusCode' in error)) {
+      const status = (error as { status?: number; statusCode?: number }).status || (error as { status?: number; statusCode?: number }).statusCode;
       
       switch (status) {
         case 401:
@@ -89,8 +89,9 @@ export class HistoricalWeatherErrorHandler {
           );
         
         case 429:
-          const retryAfter = error.headers?.['retry-after'] 
-            ? parseInt(error.headers['retry-after']) 
+          const headers = (typeof error === 'object' && error !== null && 'headers' in error) ? (error as { headers?: { [key: string]: string } }).headers : undefined;
+          const retryAfter = headers?.['retry-after'] 
+            ? parseInt(headers['retry-after']) 
             : undefined;
           return new APILimitError(
             'API rate limit exceeded. Please try again later.',
@@ -116,7 +117,7 @@ export class HistoricalWeatherErrorHandler {
     }
 
     // Handle generic errors
-    const message = error.message || 'An unexpected error occurred while fetching weather data.';
+    const message = ((typeof error === 'object' && error !== null && 'message' in error) ? (error as { message?: string }).message : undefined) || 'An unexpected error occurred while fetching weather data.';
     const contextMessage = context ? `${context}: ${message}` : message;
     
     return new HistoricalWeatherError(contextMessage, 'UNKNOWN_ERROR');
