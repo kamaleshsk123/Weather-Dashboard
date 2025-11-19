@@ -5,29 +5,34 @@ A modern, responsive weather dashboard built with Next.js 14, React, TailwindCSS
 ## Features
 
 ### 🌤️ Weather Information
+
 - **Current Weather**: Temperature, humidity, wind speed, pressure, UV index, and more
 - **7-Day Forecast**: Detailed daily weather predictions with high/low temperatures
 - **24-Hour Forecast**: Hourly weather data in a scrollable timeline
 - **Weather Alerts**: Automatic detection of extreme weather conditions
 
 ### 📊 Data Visualization
+
 - **Temperature Trends**: Interactive line charts showing hourly and weekly temperature patterns
 - **Rainfall Probability**: Bar chart displaying precipitation chances
 - **Responsive Charts**: Built with Recharts for smooth, interactive visualizations
 
 ### 🎨 Dynamic UI
+
 - **Adaptive Backgrounds**: UI theme changes based on weather conditions (sunny, rainy, stormy, etc.)
 - **Weather Icons**: Contextual emoji icons for different weather conditions
 - **Smooth Animations**: Powered by Framer Motion for fluid user experience
 - **Responsive Design**: Optimized for desktop and mobile devices
 
 ### 🔍 Location Features
+
 - **Auto-Detection**: Automatically detects user location using Geolocation API
 - **City Search**: Search and select any city worldwide
 - **Favorites**: Save and quickly access favorite cities
 - **Location History**: Easy switching between recently viewed locations
 
 ### 📱 Mobile Experience
+
 - **Touch-Friendly**: Optimized for mobile interaction
 - **Swipeable Sections**: Smooth navigation on mobile devices
 - **Responsive Layout**: Adapts perfectly to different screen sizes
@@ -47,19 +52,21 @@ A modern, responsive weather dashboard built with Next.js 14, React, TailwindCSS
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm or yarn
 - OpenWeatherMap API key (free at [openweathermap.org](https://openweathermap.org/api))
 
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/kamaleshsk123/Weather-Dashboard.git
    cd weather-dashboard
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    # or
@@ -67,16 +74,19 @@ A modern, responsive weather dashboard built with Next.js 14, React, TailwindCSS
    ```
 
 3. **Set up environment variables**
+
    ```bash
    cp .env.local.example .env.local
    ```
-   
+
    Edit `.env.local` and add your OpenWeatherMap API key:
+
    ```env
    NEXT_PUBLIC_OPENWEATHER_API_KEY=your_api_key_here
    ```
 
 4. **Run the development server**
+
    ```bash
    npm run dev
    # or
@@ -115,32 +125,41 @@ src/
 ## Key Components
 
 ### WeatherDashboard
+
 Main dashboard component that orchestrates all weather data and UI components.
 
 ### CurrentWeather
+
 Displays current weather conditions with detailed metrics and beautiful visual presentation.
 
 ### HourlyForecast
+
 24-hour weather timeline with scrollable interface showing temperature and precipitation.
 
 ### DailyForecast
+
 7-day weather forecast with high/low temperatures and weather conditions.
 
 ### WeatherCharts
+
 Interactive charts showing temperature trends and rainfall probability using Recharts.
 
 ### WeatherAlerts
+
 Automatic detection and display of extreme weather conditions with appropriate warnings.
 
 ### CitySearch
+
 Smart city search with autocomplete, favorites management, and location selection.
 
 ### WeatherBackground
+
 Dynamic background component that adapts colors and animations based on weather conditions.
 
 ## API Integration
 
 The app uses OpenWeatherMap's One Call API 3.0 which provides:
+
 - Current weather data
 - Hourly forecast (48 hours)
 - Daily forecast (8 days)
